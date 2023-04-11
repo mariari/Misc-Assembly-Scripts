@@ -1,13 +1,15 @@
+build: baby
+
+
 # baby
 
 firs:
-	yasm -f elf64 ./baby/first.asm -o dump/first && \
-	ld dump/first -o dump/first.exe
+	./dump-baby.sh first
 
 secon:
-	yasm -f elf64 ./baby/second.asm -o dump/second && \
-	ld dump/second -o dump/second.exe
+	./dump-baby.sh second
 
-baby: firs secon
+book1:
+	./dump-baby.sh book1
 
-build: baby
+baby: firs secon book1
