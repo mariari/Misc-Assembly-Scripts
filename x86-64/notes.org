@@ -25,3 +25,32 @@
     17000 (15 bits, #x4268)
   #+end_src
   + so the 6842 is just #x4268, in little endian
+* How to Read the Address
+A list file may give you something like
+
+#+begin_example
+  45 00000000 8A0425[00000000]        mov al, byte [b_var1]
+  46 00000007 020425[00000000]        add al, byte [b_var2]
+#+end_example
+
+And in the real executable that is linked we have
+
+#+begin_example
+  00001000: 8a04 2500 2040 0002 0425 0120 4000 8804  ..%. @...%. @...
+  00001010:
+#+end_example
+
+we can view it really as
+
+#+begin_example
+  8a0425 00204000      mov al, byte [b_var1]
+  020425 01204000      add al, byte [b_var2]
+#+end_example
+
+Where in reality our code is at =0x401000=, and our data table is
+really at =0x40200=.
+
+Thus if we read 0204000, we can see that it's really =00402000=
+(=0x402000=) for the address for =b_var1= and =00402001= (=0x402001=)
+* How to Debug
+Just do M-x gdb on the exe file I generate out, and it should be quite nice
