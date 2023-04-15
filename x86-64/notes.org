@@ -53,4 +53,17 @@ really at =0x40200=.
 Thus if we read 0204000, we can see that it's really =00402000=
 (=0x402000=) for the address for =b_var1= and =00402001= (=0x402001=)
 * How to Debug
-Just do M-x gdb on the exe file I generate out, and it should be quite nice
+- Just do M-x gdb on the exe file I generate out, and it should be quite nice
+- Further use iaito
+** Dumping variables in emacs
+- =x/db &b_var2= to dump a byte
+  + =x/db 0x402001= is also valid
+** Dumping variables in iaito/radare2
+- =afx= :: to list all variables
+  + =pdf=  :: show current block in assembly
+- =px 1 @ 0x00402003= :: to dump 1 byte at 0x00402003
+  + pxh 2 @ ... :: dump 1 halfword
+  + pxw 4 @ ... :: dump 1 word
+  + pxq 8 @ ... :: dump 1 quad
+  + _could use instead for decimal_
+    * pxd[1,2,4,8] number @ location :: to dump the contents with base 10
